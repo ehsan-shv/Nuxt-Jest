@@ -1,4 +1,4 @@
-## nuxt-jest common and warnings:
+## nuxt-jest common warnings:
 
 ```bash
 # install dependencies
@@ -140,7 +140,7 @@ solution:
      })  expect(wrapper.vm).toBeTruthy()  
      })})
 
-4- [Vue warn]: Error in render: "TypeError: Cannot read property '[property name]' of undefined". ([Vuelidate](https://vuelidate.js.org/))
+**4- [Vue warn]: Error in render: "TypeError: Cannot read property '[property name]' of undefined". ([Vuelidate](https://vuelidate.js.org/))**
 
 component:
 
