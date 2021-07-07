@@ -1,4 +1,4 @@
-## nuxt-jest common errors and warnings:
+## nuxt-jest common and warnings:
 
 ```bash
 # install dependencies
@@ -139,5 +139,62 @@ solution:
       propsData: { title: 'footer' }  
      })  expect(wrapper.vm).toBeTruthy()  
      })})
- 
 
+4- [Vue warn]: Error in render: "TypeError: Cannot read property '[property name]' of undefined". ([Vuelidate](https://vuelidate.js.org/))
+
+component:
+
+    <template>  
+      <aside class="c-side">  
+        <input  
+      v-model.trim="$v.name.$model"  
+      type="text"  
+      placeholder="name"  
+      >  
+      </aside>  
+    </template>  
+      
+    <script>  
+    import { required } from 'vuelidate/lib/validators'  
+      
+    export default {  
+      name: 'Side',  
+      data () {  
+      return {  
+      name: ''  
+      }  
+     },  validations: {  
+      name: {  
+      required  
+      }  
+     }}  
+    </script>
+
+test:
+
+    import { mount, createLocalVue } from '@vue/test-utils'  
+    import Side from '@/components/Side/Side'  
+      
+    describe('Side', () => {  
+      test('is a Vue instance', () => {  
+      const wrapper = mount(Side)  
+      expect(wrapper.vm).toBeTruthy()  
+     })})
+
+solution:
+
+    import { mount, createLocalVue } from '@vue/test-utils'  
+    import Side from '@/components/Side/Side'  
+    import Vuelidate from 'vuelidate'  
+      
+    const localVue = createLocalVue()  
+      
+    localVue.use(Vuelidate)  
+      
+    describe('Side', () => {  
+      test('is a Vue instance', () => {  
+      const wrapper = mount(Side, {  
+      localVue  
+      })  
+      expect(wrapper.vm).toBeTruthy()  
+     })})
